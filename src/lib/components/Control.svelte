@@ -12,21 +12,14 @@
 
 	const controlProps = $derived({
 		id: fieldContext.fieldId,
-		name: fieldContext.name,
+		name: fieldContext.form.remoteForm.field?.(fieldContext.name) || fieldContext.name,
 		'aria-describedby': [
 			fieldContext.hasErrors ? fieldContext.errorId : null,
 			fieldContext.descriptionId
 		].filter(Boolean).join(' '),
 		'aria-invalid': fieldContext.hasErrors,
 		'aria-labelledby': fieldContext.labelId,
-		value: fieldContext.value,
-		onchange: (event: Event) => {
-			const target = event.target as HTMLInputElement;
-			fieldContext.form.setValue(fieldContext.name, target.value);
-		},
-		onblur: () => {
-			fieldContext.form.validate(fieldContext.name);
-		}
+		value: fieldContext.value
 	});
 </script>
 

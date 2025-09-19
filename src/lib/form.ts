@@ -4,17 +4,20 @@ import type { Snippet } from 'svelte';
 const FORMA_FORM_CONTEXT_KEY = Symbol('forma-form');
 const FORMA_FIELD_CONTEXT_KEY = Symbol('forma-field');
 
+// Type for SvelteKit remote form objects
+export interface RemoteForm {
+	issues?: Record<string, Array<{ message: string }>> | null;
+	input?: Record<string, any>;
+	field?: (name: string) => string;
+	validate?: (options?: { includeUntouched?: boolean }) => void;
+	result?: any;
+	[key: string]: any; // For method, action, and other form props
+}
+
+// Simplified form interface that wraps the remote form
 export interface FormaForm {
-	errors: Record<string, string[]>;
-	values: Record<string, any>;
-	touched: Record<string, boolean>;
-	validate: (name?: string) => Promise<boolean>;
-	setError: (name: string, error: string | string[]) => void;
-	clearError: (name: string) => void;
-	setValue: (name: string, value: any) => void;
-	getValue: (name: string) => any;
-	reset: () => void;
-	submit: () => Promise<void>;
+	remoteForm: RemoteForm;
+	name: string;
 }
 
 export interface FormaFieldContext {
@@ -25,7 +28,7 @@ export interface FormaFieldContext {
 	descriptionId: string;
 	errorId: string;
 	hasErrors: boolean;
-	errors: string[];
+	errors: Array<{ message: string }>;
 	value: any;
 }
 

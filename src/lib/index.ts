@@ -1,6 +1,6 @@
-// Core types for forma library
+// Core types for forma library - simplified for latest remote functions API
 export interface FormaFieldProps {
-	form: any;
+	form: FormaForm;
 	name: string;
 }
 
@@ -19,7 +19,7 @@ export interface FormaDescriptionProps {
 }
 
 export interface FormaFieldsetProps {
-	form: any;
+	form: FormaForm;
 	name: string;
 }
 
@@ -44,4 +44,4 @@ export {
 	getFieldContext, 
 	generateId 
 } from './form.js';
-export type { FormaForm, FormaFieldContext } from './form.js';
+export type { FormaForm, FormaFieldContext, RemoteForm } from './form.js';

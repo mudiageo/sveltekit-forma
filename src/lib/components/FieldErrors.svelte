@@ -6,8 +6,8 @@
 
 {#if fieldContext.hasErrors}
 	<div id={fieldContext.errorId} class="forma-field-errors" role="alert" aria-live="polite">
-		{#each fieldContext.errors as error}
-			<div class="forma-error">{error}</div>
+		{#each fieldContext.errors as issue}
+			<div class="forma-error">{issue.message}</div>
 		{/each}
 	</div>
 {/if}

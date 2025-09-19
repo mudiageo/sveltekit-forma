@@ -22,13 +22,15 @@
 		labelId,
 		descriptionId,
 		errorId,
-		hasErrors: form.errors[name]?.length > 0,
-		errors: form.errors[name] || [],
-		value: form.values[name]
+		hasErrors: ((form.remoteForm.issues?.[name]?.length ?? 0) > 0),
+		errors: form.remoteForm.issues?.[name] || [],
+		value: form.remoteForm.input?.[name]
 	});
 
-	// Set context immediately using setFieldContext
-	setFieldContext(fieldContext);
+	// Set context when the component is mounted or when fieldContext changes
+	$effect(() => {
+		setFieldContext(fieldContext);
+	});
 </script>
 
 <div class="forma-field" data-field={name}>
