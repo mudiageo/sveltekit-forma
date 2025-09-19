@@ -148,7 +148,7 @@
 			<h3>Current Input</h3>
 			<pre class="values-display">{JSON.stringify(form.remoteForm.input, null, 2)}</pre>
 			
-			{#if Object.keys(form.remoteForm.issues).length > 0}
+			{#if form.remoteForm.issues && Object.keys(form.remoteForm.issues).length > 0}
 				<h3>Validation Issues</h3>
 				<pre class="errors-display">{JSON.stringify(form.remoteForm.issues, null, 2)}</pre>
 			{/if}

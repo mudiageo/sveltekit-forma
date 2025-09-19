@@ -89,7 +89,7 @@
 		},
 
 		getValue(name: string) {
-			return formValues[name];
+			return (formValues as any)[name];
 		},
 
 		reset() {
@@ -128,7 +128,7 @@
 		<h2>Create User</h2>
 		
 		<form 
-			on:submit={handleSubmit}
+			onsubmit={handleSubmit}
 			class="example-form"
 		>
 			<Field {form} name="email">

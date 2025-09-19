@@ -42,7 +42,7 @@
 			} catch (error) {
 				if (error instanceof z.ZodError) {
 					const newIssues: Record<string, Array<{ message: string }>> = {};
-					error.errors.forEach(err => {
+					error.issues.forEach((err: any) => {
 						const path = err.path.join('.');
 						if (!newIssues[path]) {
 							newIssues[path] = [];

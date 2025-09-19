@@ -7,10 +7,12 @@ const FORMOTE_FIELD_CONTEXT_KEY = Symbol('formote-field');
 // Type for SvelteKit remote form objects
 export interface RemoteForm {
 	issues?: Record<string, Array<{ message: string }>> | null;
-	input?: Record<string, any>;
+	input?: Record<string, any> | null;
 	field?: (name: string) => string;
 	validate?: (options?: { includeUntouched?: boolean }) => void;
 	result?: any;
+	method?: string;
+	action?: string;
 	[key: string]: any; // For method, action, and other form props
 }
 
