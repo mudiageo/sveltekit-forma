@@ -11,12 +11,12 @@
 	const fieldContext = getFieldContext();
 </script>
 
-<label for={fieldContext.fieldId} id={fieldContext.labelId} class="forma-label">
+<label for={fieldContext.fieldId} id={fieldContext.labelId} class="formote-label">
 	{@render children()}
 </label>
 
 <style>
-	.forma-label {
+	.formote-label {
 		display: block;
 		font-weight: 500;
 		margin-bottom: 0.25rem;

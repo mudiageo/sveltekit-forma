@@ -11,12 +11,12 @@
 	const fieldContext = getFieldContext();
 </script>
 
-<div id={fieldContext.descriptionId} class="forma-description">
+<div id={fieldContext.descriptionId} class="formote-description">
 	{@render children()}
 </div>
 
 <style>
-	.forma-description {
+	.formote-description {
 		color: #6b7280;
 		font-size: 0.875rem;
 		line-height: 1.25rem;

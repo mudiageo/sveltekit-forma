@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { Field, Control, Label, FieldErrors, Description, Fieldset, Legend } from '$lib/index.js';
 	import type { FormoteForm } from '$lib/index.js';
+	import { createUser, getUsers } from './users.remote.js';
 
 	// Create form state using Svelte 5 runes
 	let formValues = $state({
@@ -15,21 +16,11 @@
 	let formErrors = $state<Record<string, string[]>>({});
 	let formTouched = $state<Record<string, boolean>>({});
 
-	// Create mock remote form object
-	const mockRemoteForm = {
-		method: 'POST' as const,
-		action: '/api/users',
-		get input() { return formValues; },
-		get issues() { 
-			const issues: Record<string, Array<{ message: string }>> = {};
-			Object.entries(formErrors).forEach(([key, messages]) => {
-				if (messages.length > 0) {
-					issues[key] = messages.map(message => ({ message }));
-				}
-			});
-			return Object.keys(issues).length > 0 ? issues : null;
-		},
-		get result() { return null; },
+	// Create form object with validation
+	const form: FormoteForm = {
+		get errors() { return formErrors; },
+		get values() { return formValues; },
+		get touched() { return formTouched; },
 
 		async validate(name?: string) {
 			const errors: Record<string, string> = {};
@@ -108,15 +99,26 @@
 		async submit() {
 			const isValid = await this.validate();
 			if (isValid) {
-				console.log('Form submitted successfully', formValues);
+				console.log('Form submitted successfully');
 			}
 		}
 	};
 
-	// Handle form submission
-	async function handleSubmit(event: Event) {
-		event.preventDefault();
-		await form.submit();
+	// Get the remote form handler
+	const remoteForm = createUser;
+
+	// Handle form submission with remote functions
+	async function handleSubmit() {
+		const isValid = await form.validate();
+		if (!isValid) return;
+
+		try {
+			// The form will be submitted via the enhance function
+			// This is just for demonstration
+			console.log('Form is valid and ready to submit');
+		} catch (error) {
+			console.error('Submission error:', error);
+		}
 	}
 </script>
 
@@ -128,7 +130,18 @@
 		<h2>Create User</h2>
 		
 		<form 
-			on:submit={handleSubmit}
+			{...remoteForm.enhance(async ({ form: formElement, data, submit }) => {
+				const isValid = await form.validate();
+				if (isValid) {
+					try {
+						await submit();
+						form.reset();
+						await getUsers().refresh();
+					} catch (error) {
+						console.error('Form submission error:', error);
+					}
+				}
+			})}
 			class="example-form"
 		>
 			<Field {form} name="email">
@@ -241,13 +254,19 @@
 	</div>
 
 	<div class="users-section">
-		<h2>Form Values (Live)</h2>
-		<pre class="values-display">{JSON.stringify(formValues, null, 2)}</pre>
-		
-		{#if Object.keys(formErrors).length > 0}
-			<h3>Validation Errors</h3>
-			<pre class="errors-display">{JSON.stringify(formErrors, null, 2)}</pre>
-		{/if}
+		<h2>Users</h2>
+		{#each await getUsers() as user (user.id)}
+			<div class="user-card">
+				<h3>{user.name}</h3>
+				<p><strong>Email:</strong> {user.email}</p>
+				{#if user.bio}
+					<p><strong>Bio:</strong> {user.bio}</p>
+				{/if}
+				<p><strong>Language:</strong> {user.language}</p>
+				<p><strong>Theme:</strong> {user.theme}</p>
+				<p><strong>Marketing Emails:</strong> {user.marketingEmails ? 'Yes' : 'No'}</p>
+			</div>
+		{/each}
 	</div>
 </div>
 
@@ -316,20 +335,22 @@
 		background: #2563eb;
 	}
 
-	.values-display, .errors-display {
-		background: #f3f4f6;
-		padding: 1rem;
-		border-radius: 0.375rem;
+	.user-card {
+		background: white;
+		padding: 1.5rem;
+		border-radius: 0.5rem;
 		border: 1px solid #e5e7eb;
-		font-family: monospace;
-		font-size: 0.875rem;
-		overflow-x: auto;
+		margin-bottom: 1rem;
 	}
 
-	.errors-display {
-		background: #fef2f2;
-		border-color: #fecaca;
-		color: #991b1b;
+	.user-card h3 {
+		margin: 0 0 1rem 0;
+		color: #1f2937;
+	}
+
+	.user-card p {
+		margin: 0.5rem 0;
+		color: #6b7280;
 	}
 
 	h1, h2 {

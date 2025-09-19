@@ -1,12 +1,12 @@
-# Remotive
+# Formote
 
 The most powerful form library for SvelteKit with native remote functions support.
 
-[![npm version](https://badge.fury.io/js/remotive.svg)](https://badge.fury.io/js/remotive)
+[![npm version](https://badge.fury.io/js/formote.svg)](https://badge.fury.io/js/formote)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 
-**Remotive** is a modern, accessible, and type-safe form library built specifically for SvelteKit's experimental remote functions feature. It provides a component-based architecture with excellent developer experience, inspired by formsnap but designed from the ground up for remote functions.
+**Formote** is a modern, accessible, and type-safe form library built specifically for SvelteKit's experimental remote functions feature. It provides a component-based architecture with excellent developer experience, inspired by formsnap but designed from the ground up for remote functions.
 
 ## ✨ Features
 
@@ -22,7 +22,7 @@ The most powerful form library for SvelteKit with native remote functions suppor
 ## 📦 Installation
 
 ```bash
-npm install remotive
+npm install formote
 ```
 
 ## 🚀 Quick Start
@@ -72,7 +72,7 @@ export const createUser = form(userSchema, async (data) => {
 
 ```svelte
 <script lang="ts">
-  import { Field, Control, Label, FieldErrors, Description } from 'remotive';
+  import { Field, Control, Label, FieldErrors, Description } from 'formote';
   import { createUser } from './users.remote.js';
   import { z } from 'zod';
 
@@ -171,11 +171,11 @@ For grouping related form controls (like radio buttons).
 
 ## 🎨 Usage with shadcn-svelte
 
-Remotive works perfectly with shadcn-svelte components:
+Formote works perfectly with shadcn-svelte components:
 
 ```svelte
 <script lang="ts">
-  import { Field, Control, Label, FieldErrors } from 'remotive';
+  import { Field, Control, Label, FieldErrors } from 'formote';
   import { Input } from '$lib/components/ui/input';
   import { Button } from '$lib/components/ui/button';
   import { createUser } from './users.remote.js';
@@ -280,7 +280,7 @@ MIT © [mudiageo](https://github.com/mudiageo)
 
 ## 🔗 Links
 
-- [Documentation](https://remotive.dev)
+- [Documentation](https://formote.dev)
 - [Examples](https://github.com/mudiageo/sveltekit-forma/tree/main/examples)
 - [Changelog](CHANGELOG.md)
 - [SvelteKit Remote Functions](https://svelte.dev/docs/kit/remote-functions)

@@ -1,6 +1,6 @@
-# Remotive Documentation Site
+# Formote Documentation Site
 
-This directory contains the documentation website for Remotive.
+This directory contains the documentation website for Formote.
 
 ## Development
 

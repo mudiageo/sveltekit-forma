@@ -3,10 +3,10 @@ import { render, screen } from '@testing-library/svelte';
 import Field from '../components/Field.svelte';
 import Label from '../components/Label.svelte';
 import Control from '../components/Control.svelte';
-import type { FormaForm } from '../form.js';
+import type { FormoteForm } from '../form.js';
 
 describe('Field Component', () => {
-	const mockForm: FormaForm = {
+	const mockForm: FormoteForm = {
 		remoteForm: {
 			issues: {},
 			input: { testField: 'test value' },
@@ -48,7 +48,7 @@ describe('Field Component', () => {
 
 describe('Form Integration', () => {
 	it('handles form validation correctly', () => {
-		const mockFormWithErrors: FormaForm = {
+		const mockFormWithErrors: FormoteForm = {
 			remoteForm: {
 				issues: {
 					email: [{ message: 'Email is required' }]

@@ -1,31 +1,34 @@
-// Remotive - The most powerful form library for SvelteKit with native remote functions support
+// Formote - The most powerful form library for SvelteKit with native remote functions support
 
-// Core types for forma library - simplified for latest remote functions API
-export interface FormaFieldProps {
-	form: FormaForm;
+// Import types first
+import type { FormoteForm } from './form.js';
+
+// Core types for formote library - simplified for latest remote functions API
+export interface FormoteFieldProps {
+	form: FormoteForm;
 	name: string;
 }
 
-export interface FormaControlProps {
+export interface FormoteControlProps {
 	children?: any;
 }
 
-export interface FormaLabelProps {
+export interface FormoteLabelProps {
 	children?: any;
 }
 
-export interface FormaFieldErrorsProps {}
+export interface FormoteFieldErrorsProps {}
 
-export interface FormaDescriptionProps {
+export interface FormoteDescriptionProps {
 	children?: any;
 }
 
-export interface FormaFieldsetProps {
-	form: FormaForm;
+export interface FormoteFieldsetProps {
+	form: FormoteForm;
 	name: string;
 }
 
-export interface FormaLegendProps {
+export interface FormoteLegendProps {
 	children?: any;
 }
 
@@ -46,4 +49,4 @@ export {
 	getFieldContext, 
 	generateId 
 } from './form.js';
-export type { FormaForm, FormaFieldContext, RemoteForm } from './form.js';
+export type { FormoteForm, FormoteFieldContext, RemoteForm } from './form.js';

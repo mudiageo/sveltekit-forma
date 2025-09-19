@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { setFieldContext, generateId, type FormaForm, type FormaFieldContext } from '../form.js';
+	import { setFieldContext, generateId, type FormoteForm, type FormoteFieldContext } from '../form.js';
 	import type { Snippet } from 'svelte';
 
 	interface Props {
-		form: FormaForm;
+		form: FormoteForm;
 		name: string;
 		children: Snippet;
 	}
@@ -15,7 +15,7 @@
 	const descriptionId = generateId('description');
 	const errorId = generateId('error');
 
-	const fieldContext: FormaFieldContext = $derived({
+	const fieldContext: FormoteFieldContext = $derived({
 		name,
 		form,
 		fieldId,
@@ -33,12 +33,12 @@
 	});
 </script>
 
-<div class="forma-field" data-field={name}>
+<div class="formote-field" data-field={name}>
 	{@render children()}
 </div>
 
 <style>
-	.forma-field {
+	.formote-field {
 		margin-bottom: 1rem;
 	}
 </style>

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Field, Control, Label, FieldErrors, Description } from '$lib/index.js';
-	import type { FormaForm } from '$lib/index.js';
+	import type { FormoteForm } from '$lib/index.js';
 	import { z } from 'zod';
 
 	// Mock shadcn-svelte components (in real usage, these would be imported from your ui lib)
@@ -59,8 +59,8 @@
 		}
 	};
 
-	// Create FormaForm compatible with shadcn-svelte
-	const form: FormaForm = {
+	// Create FormoteForm compatible with shadcn-svelte
+	const form: FormoteForm = {
 		remoteForm: mockRemoteForm,
 		name: 'createUser'
 	};
@@ -91,9 +91,9 @@
 	<div class="mx-auto max-w-2xl">
 		<div class="space-y-6">
 			<div class="space-y-2">
-				<h1 class="text-3xl font-bold tracking-tight">Remotive + shadcn-svelte</h1>
+				<h1 class="text-3xl font-bold tracking-tight">Formote + shadcn-svelte</h1>
 				<p class="text-muted-foreground">
-					A beautiful form using Remotive components with shadcn-svelte styling.
+					A beautiful form using Formote components with shadcn-svelte styling.
 				</p>
 			</div>
 

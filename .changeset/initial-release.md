@@ -1,8 +1,8 @@
 ---
-"remotive": major
+"formote": major
 ---
 
-Initial release of Remotive - The most powerful form library for SvelteKit with native remote functions support.
+Initial release of Formote - The most powerful form library for SvelteKit with native remote functions support.
 
 ### Features
 

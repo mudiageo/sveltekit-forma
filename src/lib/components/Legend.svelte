@@ -11,12 +11,12 @@
 	const fieldContext = getFieldContext();
 </script>
 
-<legend id={fieldContext.labelId} class="forma-legend">
+<legend id={fieldContext.labelId} class="formote-legend">
 	{@render children()}
 </legend>
 
 <style>
-	.forma-legend {
+	.formote-legend {
 		font-weight: 600;
 		margin-bottom: 0.5rem;
 		padding: 0 0.25rem;

@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Field, Control, Label, FieldErrors, Description, Fieldset, Legend } from '$lib/index.js';
-	import type { FormaForm } from '$lib/index.js';
+	import type { FormoteForm } from '$lib/index.js';
 	import { createUser, getUsers } from '../users.remote.js';
 	import { z } from 'zod';
 
@@ -14,15 +14,15 @@
 		marketingEmails: z.string().optional()
 	});
 
-	// Wrap the remote form in our FormaForm interface
-	const form: FormaForm = {
+	// Wrap the remote form in our FormoteForm interface
+	const form: FormoteForm = {
 		remoteForm: createUser.preflight(clientSchema),
 		name: 'createUser'
 	};
 </script>
 
 <div class="container">
-	<h1>SvelteKit Forma - Remote Functions</h1>
+	<h1>SvelteKit Formote - Remote Functions</h1>
 	<p>A form library built on SvelteKit's latest remote functions API</p>
 	
 	<div class="form-section">

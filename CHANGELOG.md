@@ -1,4 +1,4 @@
-# Remotive Changelog
+# Formote Changelog
 
 All notable changes to this project will be documented in this file.
 
@@ -8,7 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Initial release of Remotive
+- Initial release of Formote
 - Core form components (Field, Control, Label, FieldErrors, Description, Fieldset, Legend)
 - TypeScript support with full type safety
 - Accessibility features with ARIA attributes

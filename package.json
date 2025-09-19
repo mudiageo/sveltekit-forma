@@ -1,5 +1,5 @@
 {
-	"name": "remotive",
+	"name": "formote",
 	"version": "0.1.0",
 	"description": "The most powerful form library for SvelteKit with native remote functions support",
 	"keywords": ["svelte", "sveltekit", "forms", "remote-functions", "validation", "typescript", "accessibility", "a11y", "progressive-enhancement"],

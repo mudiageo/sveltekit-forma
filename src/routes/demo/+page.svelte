@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { Field, Control, Label, FieldErrors, Description, Fieldset, Legend } from '$lib/index.js';
-	import type { FormaForm } from '$lib/index.js';
+	import type { FormoteForm } from '$lib/index.js';
 	import { getUsers, createUser } from '../demo-utils.js';
 	import { z } from 'zod';
 
@@ -55,8 +55,8 @@
 		}
 	};
 
-	// Wrap the mock remote form in our FormaForm interface
-	const form: FormaForm = {
+	// Wrap the mock remote form in our FormoteForm interface
+	const form: FormoteForm = {
 		remoteForm: mockRemoteForm,
 		name: 'createUser'
 	};
@@ -104,7 +104,7 @@
 </script>
 
 <div class="container">
-	<h1>SvelteKit Forma - Updated API</h1>
+	<h1>SvelteKit Formote - Updated API</h1>
 	<p>A form library that's ready for SvelteKit's remote functions</p>
 	
 	<div class="form-section">

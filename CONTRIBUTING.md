@@ -1,6 +1,6 @@
-# Contributing to Remotive
+# Contributing to Formote
 
-Thank you for your interest in contributing to Remotive! This guide will help you get started.
+Thank you for your interest in contributing to Formote! This guide will help you get started.
 
 ## Development Setup
 
@@ -161,6 +161,6 @@ We use [Changesets](https://github.com/changesets/changesets) for version manage
 
 ## Code of Conduct
 
-Please be respectful and inclusive in all interactions. We want Remotive to be a welcoming project for everyone.
+Please be respectful and inclusive in all interactions. We want Formote to be a welcoming project for everyone.
 
-Thank you for contributing to Remotive! 🚀
+Thank you for contributing to Formote! 🚀

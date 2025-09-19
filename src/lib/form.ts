@@ -1,8 +1,8 @@
 import { getContext, setContext } from 'svelte';
 import type { Snippet } from 'svelte';
 
-const FORMA_FORM_CONTEXT_KEY = Symbol('forma-form');
-const FORMA_FIELD_CONTEXT_KEY = Symbol('forma-field');
+const FORMOTE_FORM_CONTEXT_KEY = Symbol('formote-form');
+const FORMOTE_FIELD_CONTEXT_KEY = Symbol('formote-field');
 
 // Type for SvelteKit remote form objects
 export interface RemoteForm {
@@ -15,14 +15,14 @@ export interface RemoteForm {
 }
 
 // Simplified form interface that wraps the remote form
-export interface FormaForm {
+export interface FormoteForm {
 	remoteForm: RemoteForm;
 	name: string;
 }
 
-export interface FormaFieldContext {
+export interface FormoteFieldContext {
 	name: string;
-	form: FormaForm;
+	form: FormoteForm;
 	fieldId: string;
 	labelId: string;
 	descriptionId: string;
@@ -35,15 +35,15 @@ export interface FormaFieldContext {
 /**
  * Sets the form context for child components
  */
-export function setFormContext(form: FormaForm) {
-	setContext(FORMA_FORM_CONTEXT_KEY, form);
+export function setFormContext(form: FormoteForm) {
+	setContext(FORMOTE_FORM_CONTEXT_KEY, form);
 }
 
 /**
  * Gets the form context
  */
-export function getFormContext(): FormaForm {
-	const form = getContext<FormaForm>(FORMA_FORM_CONTEXT_KEY);
+export function getFormContext(): FormoteForm {
+	const form = getContext<FormoteForm>(FORMOTE_FORM_CONTEXT_KEY);
 	if (!form) {
 		throw new Error('Form context not found. Make sure to use form components within a Field component.');
 	}
@@ -53,15 +53,15 @@ export function getFormContext(): FormaForm {
 /**
  * Sets the field context for child components
  */
-export function setFieldContext(context: FormaFieldContext) {
-	setContext(FORMA_FIELD_CONTEXT_KEY, context);
+export function setFieldContext(context: FormoteFieldContext) {
+	setContext(FORMOTE_FIELD_CONTEXT_KEY, context);
 }
 
 /**
  * Gets the field context
  */
-export function getFieldContext(): FormaFieldContext {
-	const context = getContext<FormaFieldContext>(FORMA_FIELD_CONTEXT_KEY);
+export function getFieldContext(): FormoteFieldContext {
+	const context = getContext<FormoteFieldContext>(FORMOTE_FIELD_CONTEXT_KEY);
 	if (!context) {
 		throw new Error('Field context not found. Make sure to use this component within a Field component.');
 	}
@@ -71,6 +71,6 @@ export function getFieldContext(): FormaFieldContext {
 /**
  * Generates a unique ID for form elements
  */
-export function generateId(prefix: string = 'forma'): string {
+export function generateId(prefix: string = 'formote'): string {
 	return `${prefix}-${Math.random().toString(36).substr(2, 9)}`;
 }
