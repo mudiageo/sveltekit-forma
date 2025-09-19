@@ -12,7 +12,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Core form components (Field, Control, Label, FieldErrors, Description, Fieldset, Legend)
 - TypeScript support with full type safety
 - Accessibility features with ARIA attributes
-- Integration with SvelteKit remote functions
+- Integration with SvelteKit 2.42+ remote functions
 - shadcn-svelte compatibility
 - Comprehensive documentation and examples
 - Testing setup with Vitest

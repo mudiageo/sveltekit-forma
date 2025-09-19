@@ -6,7 +6,7 @@ Initial release of Formote - The most powerful form library for SvelteKit with n
 
 ### Features
 
-- 🚀 Native Remote Functions Support - Built for SvelteKit 2.27+ experimental remote functions
+- 🚀 Native Remote Functions Support - Built for SvelteKit 2.42+ remote functions
 - 🎯 Type-Safe - Full TypeScript support with excellent type inference  
 - ♿ Accessible by Default - ARIA attributes and semantic HTML out of the box
 - 🎨 Unstyled & Flexible - Bring your own styles, works with any CSS framework

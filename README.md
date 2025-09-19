@@ -10,7 +10,7 @@ The most powerful form library for SvelteKit with native remote functions suppor
 
 ## ✨ Features
 
-- 🚀 **Native Remote Functions Support** - Built for SvelteKit 2.27+ experimental remote functions
+- 🚀 **Native Remote Functions Support** - Built for SvelteKit 2.42+ remote functions
 - 🎯 **Type-Safe** - Full TypeScript support with excellent type inference
 - ♿ **Accessible by Default** - ARIA attributes and semantic HTML out of the box
 - 🎨 **Unstyled & Flexible** - Bring your own styles, works with any CSS framework
@@ -24,6 +24,8 @@ The most powerful form library for SvelteKit with native remote functions suppor
 ```bash
 npm install formote
 ```
+
+> **⚠️ Compatibility Notice**: Formote requires SvelteKit 2.42+ as the remote functions API was stabilized in this version. It is not compatible with SvelteKit 2.27 to 2.41 due to API changes in the remote functions implementation.
 
 ## 🚀 Quick Start
 
@@ -203,10 +205,10 @@ Formote works perfectly with shadcn-svelte components:
 
 ## 📖 API Reference
 
-### FormaForm Interface
+### FormoteForm Interface
 
 ```typescript
-interface FormaForm {
+interface FormoteForm {
   remoteForm: RemoteForm;
   name: string;
 }
