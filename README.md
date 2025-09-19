@@ -1,28 +1,33 @@
-# SvelteKit Forma
+# Remotive
 
-A modern form library for SvelteKit built on top of the new **remote functions** feature. Forma provides accessible, type-safe, and progressive enhancement-ready form components that integrate seamlessly with SvelteKit's server-side functionality.
+The most powerful form library for SvelteKit with native remote functions support.
 
-## Features
+[![npm version](https://badge.fury.io/js/remotive.svg)](https://badge.fury.io/js/remotive)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-Ready-blue.svg)](https://www.typescriptlang.org/)
 
-- 🚀 **Built for SvelteKit 2.27+** - Uses the new experimental remote functions
-- 🎯 **Type-safe** - Full TypeScript support with excellent type inference
-- ♿ **Accessible** - ARIA attributes and proper semantic HTML out of the box
-- 🎨 **Flexible** - Bring your own styles, works with any CSS framework
+**Remotive** is a modern, accessible, and type-safe form library built specifically for SvelteKit's experimental remote functions feature. It provides a component-based architecture with excellent developer experience, inspired by formsnap but designed from the ground up for remote functions.
+
+## ✨ Features
+
+- 🚀 **Native Remote Functions Support** - Built for SvelteKit 2.27+ experimental remote functions
+- 🎯 **Type-Safe** - Full TypeScript support with excellent type inference
+- ♿ **Accessible by Default** - ARIA attributes and semantic HTML out of the box
+- 🎨 **Unstyled & Flexible** - Bring your own styles, works with any CSS framework
 - 🔄 **Progressive Enhancement** - Works without JavaScript, enhanced with it
-- 📱 **Reactive** - Real-time validation and form state updates
+- 📱 **Reactive** - Real-time validation and form state updates using Svelte 5 runes
 - 🧩 **Composable** - Component-based architecture with sensible defaults
+- 🌙 **shadcn/ui Compatible** - Works seamlessly with shadcn-svelte components
 
-## Quick Start
-
-![SvelteKit Forma Demo](https://github.com/user-attachments/assets/b679444b-21a6-4af8-ac64-b2a77b5c4a6f)
-
-### Installation
+## 📦 Installation
 
 ```bash
-npm install sveltekit-forma
+npm install remotive
 ```
 
-### Enable Remote Functions
+## 🚀 Quick Start
+
+### 1. Enable Remote Functions
 
 Add the experimental remote functions feature to your `svelte.config.js`:
 
@@ -44,69 +49,53 @@ const config = {
 export default config;
 ```
 
-### Basic Usage
+### 2. Create a Remote Function
+
+```typescript
+// src/routes/users.remote.ts
+import { form } from '$app/server';
+import { z } from 'zod';
+
+const userSchema = z.object({
+  email: z.string().email('Please enter a valid email address'),
+  name: z.string().min(1, 'Name is required'),
+  bio: z.string().optional()
+});
+
+export const createUser = form(userSchema, async (data) => {
+  // Save to database
+  return { success: true, user: data };
+});
+```
+
+### 3. Create Your Form
 
 ```svelte
 <script lang="ts">
-  import { Field, Control, Label, FieldErrors, Description } from 'sveltekit-forma';
-  import type { FormaForm } from 'sveltekit-forma';
+  import { Field, Control, Label, FieldErrors, Description } from 'remotive';
+  import { createUser } from './users.remote.js';
+  import { z } from 'zod';
 
-  // Create reactive form state
-  let formValues = $state({
-    email: '',
-    name: '',
-    bio: ''
+  // Client-side validation schema
+  const clientSchema = z.object({
+    email: z.string().email(),
+    name: z.string().min(1),
+    bio: z.string().optional()
   });
 
-  let formErrors = $state<Record<string, string[]>>({});
-
-  // Create form object with validation
-  const form: FormaForm = {
-    get errors() { return formErrors; },
-    get values() { return formValues; },
-    get touched() { return formTouched; },
-
-    async validate() {
-      const errors: Record<string, string> = {};
-      
-      if (!formValues.email) {
-        errors.email = 'Email is required';
-      } else if (!/\S+@\S+\.\S+/.test(formValues.email)) {
-        errors.email = 'Please enter a valid email address';
-      }
-      
-      if (!formValues.name) {
-        errors.name = 'Name is required';
-      }
-      
-      // Update form errors
-      const newErrors: Record<string, string[]> = {};
-      Object.keys(errors).forEach(key => {
-        newErrors[key] = [errors[key]];
-      });
-      formErrors = newErrors;
-      
-      return Object.keys(formErrors).length === 0;
-    },
-
-    setValue(name: string, value: any) {
-      formValues = { ...formValues, [name]: value };
-    },
-
-    // ... other methods
+  // Create form with preflight validation
+  const form = {
+    remoteForm: createUser.preflight(clientSchema),
+    name: 'createUser'
   };
 </script>
 
-<form>
+<form {...form.remoteForm}>
   <Field {form} name="email">
     <Label>Email Address</Label>
     <Control>
       {#snippet children({ props })}
-        <input 
-          type="email" 
-          {...props} 
-          bind:value={formValues.email}
-        />
+        <input type="email" {...props} class="input" />
       {/snippet}
     </Control>
     <Description>We'll send you important updates via email.</Description>
@@ -117,21 +106,17 @@ export default config;
     <Label>Full Name</Label>
     <Control>
       {#snippet children({ props })}
-        <input 
-          type="text" 
-          {...props} 
-          bind:value={formValues.name}
-        />
+        <input type="text" {...props} class="input" />
       {/snippet}
     </Control>
     <FieldErrors />
   </Field>
 
-  <button type="submit">Submit</button>
+  <button type="submit">Create User</button>
 </form>
 ```
 
-## Components
+## 🧩 Components
 
 ### Field
 The root component that provides context for all other form components.
@@ -148,7 +133,7 @@ Wraps form controls and provides proper attributes for accessibility.
 ```svelte
 <Control>
   {#snippet children({ props })}
-    <input type="text" {...props} bind:value={formValues.fieldName} />
+    <input type="text" {...props} />
   {/snippet}
 </Control>
 ```
@@ -184,74 +169,118 @@ For grouping related form controls (like radio buttons).
 </Fieldset>
 ```
 
-## Integration with Remote Functions
+## 🎨 Usage with shadcn-svelte
 
-SvelteKit Forma is designed to work seamlessly with SvelteKit's remote functions:
-
-```typescript
-// users.remote.ts
-import { form } from '$app/server';
-import { z } from 'zod';
-
-const userSchema = z.object({
-  email: z.string().email(),
-  name: z.string().min(1),
-  bio: z.string().optional()
-});
-
-export const createUser = form(async (data: FormData) => {
-  const rawData = {
-    email: data.get('email'),
-    name: data.get('name'),
-    bio: data.get('bio')
-  };
-
-  try {
-    const validData = userSchema.parse(rawData);
-    // Save to database
-    return { success: true };
-  } catch (error) {
-    // Return validation errors
-    return { errors: /* formatted errors */ };
-  }
-});
-```
+Remotive works perfectly with shadcn-svelte components:
 
 ```svelte
-<!-- +page.svelte -->
-<script>
+<script lang="ts">
+  import { Field, Control, Label, FieldErrors } from 'remotive';
+  import { Input } from '$lib/components/ui/input';
+  import { Button } from '$lib/components/ui/button';
   import { createUser } from './users.remote.js';
 
-  const remoteForm = createUser;
+  const form = {
+    remoteForm: createUser.preflight(clientSchema),
+    name: 'createUser'
+  };
 </script>
 
-<form 
-  {...remoteForm.enhance(async ({ submit }) => {
-    const isValid = await form.validate();
-    if (isValid) {
-      await submit();
-      form.reset();
-    }
-  })}
->
-  <!-- Form components -->
+<form {...form.remoteForm} class="space-y-4">
+  <Field {form} name="email">
+    <Label class="text-sm font-medium">Email Address</Label>
+    <Control>
+      {#snippet children({ props })}
+        <Input type="email" {...props} />
+      {/snippet}
+    </Control>
+    <FieldErrors class="text-sm text-destructive" />
+  </Field>
+
+  <Button type="submit">Create User</Button>
 </form>
 ```
 
-## Examples
+## 📖 API Reference
 
-Check out the `/simple` route in this repository for a complete working example.
+### FormaForm Interface
 
-## Requirements
+```typescript
+interface FormaForm {
+  remoteForm: RemoteForm;
+  name: string;
+}
 
-- SvelteKit 2.27.0 or later
-- Svelte 5.0.0 or later
-- TypeScript (recommended)
+interface RemoteForm {
+  issues?: Record<string, Array<{ message: string }>> | null;
+  input?: Record<string, any>;
+  field?: (name: string) => string;
+  validate?: (options?: { includeUntouched?: boolean }) => void;
+  result?: any;
+  [key: string]: any; // For method, action, and other form props
+}
+```
 
-## License
+## 🔧 Advanced Usage
 
-MIT
+### Custom Validation
 
-## Contributing
+```svelte
+<script>
+  // Validate on every keystroke
+  const form = {
+    remoteForm: createUser.preflight(clientSchema),
+    name: 'createUser'
+  };
+</script>
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+<form {...form.remoteForm} oninput={() => form.remoteForm.validate?.()}>
+  <!-- form fields -->
+</form>
+```
+
+### Enhanced Form Submission
+
+```svelte
+<script>
+  import { enhance } from '$app/forms';
+
+  const form = {
+    remoteForm: createUser.enhance(async ({ submit }) => {
+      const result = await submit();
+      if (result.success) {
+        // Handle success
+      }
+    }),
+    name: 'createUser'
+  };
+</script>
+```
+
+## 🧪 Testing
+
+```bash
+# Run tests
+npm test
+
+# Run tests with coverage
+npm run test:coverage
+
+# Run tests in UI mode
+npm run test:ui
+```
+
+## 📝 Contributing
+
+Contributions are welcome! Please read our [Contributing Guide](CONTRIBUTING.md) for details.
+
+## 📄 License
+
+MIT © [mudiageo](https://github.com/mudiageo)
+
+## 🔗 Links
+
+- [Documentation](https://remotive.dev)
+- [Examples](https://github.com/mudiageo/sveltekit-forma/tree/main/examples)
+- [Changelog](CHANGELOG.md)
+- [SvelteKit Remote Functions](https://svelte.dev/docs/kit/remote-functions)

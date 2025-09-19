@@ -1,3 +1,5 @@
+// Remotive - The most powerful form library for SvelteKit with native remote functions support
+
 // Core types for forma library - simplified for latest remote functions API
 export interface FormaFieldProps {
 	form: FormaForm;

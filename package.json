@@ -1,10 +1,21 @@
 {
-	"name": "sveltekit-forma",
+	"name": "remotive",
 	"version": "0.1.0",
-	"description": "A form library for SvelteKit based on remote functions",
-	"keywords": ["svelte", "sveltekit", "forms", "remote-functions", "validation"],
+	"description": "The most powerful form library for SvelteKit with native remote functions support",
+	"keywords": ["svelte", "sveltekit", "forms", "remote-functions", "validation", "typescript", "accessibility", "a11y", "progressive-enhancement"],
 	"license": "MIT",
-	"author": "mudiageo",
+	"author": {
+		"name": "mudiageo",
+		"url": "https://github.com/mudiageo"
+	},
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/mudiageo/sveltekit-forma.git"
+	},
+	"homepage": "https://github.com/mudiageo/sveltekit-forma#readme",
+	"bugs": {
+		"url": "https://github.com/mudiageo/sveltekit-forma/issues"
+	},
 	"type": "module",
 	"exports": {
 		".": {
@@ -27,19 +38,33 @@
 		"prepublishOnly": "npm run package",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
+		"test": "vitest",
+		"test:coverage": "vitest --coverage",
+		"test:ui": "vitest --ui",
 		"lint": "prettier --check . && eslint .",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"release": "changeset publish",
+		"version": "changeset version",
+		"docs:dev": "cd docs && npm run dev",
+		"docs:build": "cd docs && npm run build",
+		"docs:preview": "cd docs && npm run preview"
 	},
 	"devDependencies": {
+		"@changesets/cli": "^2.27.0",
 		"@sveltejs/adapter-auto": "^3.0.0",
 		"@sveltejs/kit": "^2.27.0",
 		"@sveltejs/package": "^2.0.0",
 		"@sveltejs/vite-plugin-svelte": "^4.0.0",
+		"@testing-library/jest-dom": "^6.1.0",
+		"@testing-library/svelte": "^4.1.0",
 		"@types/eslint": "^9.6.0",
+		"@vitest/coverage-v8": "^1.0.0",
+		"@vitest/ui": "^1.0.0",
 		"eslint": "^9.0.0",
 		"eslint-config-prettier": "^9.1.0",
 		"eslint-plugin-svelte": "^2.36.0",
 		"globals": "^15.0.0",
+		"jsdom": "^23.0.0",
 		"prettier": "^3.1.1",
 		"prettier-plugin-svelte": "^3.1.2",
 		"publint": "^0.1.9",
@@ -47,7 +72,8 @@
 		"svelte-check": "^4.0.0",
 		"typescript": "^5.0.0",
 		"typescript-eslint": "^8.0.0",
-		"vite": "^5.0.3"
+		"vite": "^5.0.3",
+		"vitest": "^1.0.0"
 	},
 	"peerDependencies": {
 		"@sveltejs/kit": "^2.27.0",
@@ -55,5 +81,12 @@
 	},
 	"dependencies": {
 		"zod": "^3.24.1"
+	},
+	"publishConfig": {
+		"access": "public",
+		"provenance": true
+	},
+	"engines": {
+		"node": ">=18.0.0"
 	}
 }
